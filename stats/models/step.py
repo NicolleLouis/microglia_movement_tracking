@@ -7,7 +7,7 @@ class Step(models.Model):
     position = models.ForeignKey(
         'Position',
         on_delete=models.PROTECT,
-        null=False,
+        null=True,
     )
     time = models.IntegerField(
         null=False
@@ -19,7 +19,7 @@ class Step(models.Model):
     )
 
     def __str__(self):
-        return f'{self.id}: {self.position} at {self.time}'
+        return f'{self.cell.id}: {self.position} at {self.time}'
 
 
 @admin.register(Step)

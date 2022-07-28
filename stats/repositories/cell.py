@@ -8,3 +8,7 @@ class CellRepository:
             id=cell_id
         )
         return cell, created
+
+    @staticmethod
+    def get_all():
+        return Cell.objects.all()

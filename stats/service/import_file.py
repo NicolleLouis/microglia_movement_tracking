@@ -1,8 +1,8 @@
 import csv
-import pdb
 
 from stats.constants.cell_type import CellType
 from stats.repositories.cell import CellRepository
+from stats.repositories.step import StepRepository
 from stats.service.position import PositionService
 
 
@@ -68,3 +68,18 @@ class ImportFile:
             cell.current_position = PositionService.create_empty_position()
             cell.save()
         return cell
+
+    @staticmethod
+    def get_or_create_step(data: RawData, cell):
+        step, created = StepRepository.get_or_create_by_cell_and_time(
+            cell=cell,
+            time=data.time
+        )
+        if created:
+            step.position = PositionService.create_position(
+                x=data.x,
+                y=data.y,
+                z=data.z,
+            )
+            step.save()
+        return step

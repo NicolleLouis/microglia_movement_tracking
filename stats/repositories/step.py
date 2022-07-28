@@ -1,10 +1,15 @@
-from stats.models import Cell
+from stats.models import Step
 
 
-class CellRepository:
+class StepRepository:
     @staticmethod
-    def get_or_create_by_id(cell_id: int):
-        cell, created = Cell.objects.get_or_create(
-            id=cell_id
+    def get_or_create_by_cell_and_time(cell, time: int):
+        step, created = Step.objects.get_or_create(
+            cell=cell,
+            time=time
         )
-        return cell, created
+        return step, created
+
+    @staticmethod
+    def get_by_cell(cell):
+        return Step.objects.filter(cell=cell)
