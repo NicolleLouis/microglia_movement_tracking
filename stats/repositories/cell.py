@@ -12,3 +12,8 @@ class CellRepository:
     @staticmethod
     def get_all():
         return Cell.objects.all()
+
+    @staticmethod
+    def get_all_valid_cell():
+        minimum_steps = 60
+        return Cell.objects.filter(current_time__gte=minimum_steps)

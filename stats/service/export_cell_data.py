@@ -30,7 +30,7 @@ class ExportCellDataService:
         self.writer.writerow(["type", "x", "y", "z"])
 
     def generate_lines(self):
-        cells = CellRepository.get_all()
+        cells = CellRepository.get_all_valid_cell()
         for cell in cells:
             self.generate_line(cell)
 
